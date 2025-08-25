@@ -1,0 +1,200 @@
+﻿@using Cenima_project.NewModels
+@model AdditionalActors
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - EgyCinema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #2c3e50;
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+            header .logo {
+                font-size: 2rem;
+                font-weight: bold;
+                color: #e74c3c;
+            }
+
+            header nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                margin-right: 20px;
+            }
+
+                header nav a:hover {
+                    color: #e74c3c;
+                }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Movie Details Layout */
+        .movie-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .movie-poster {
+            flex: 1 1 40%;
+        }
+
+            .movie-poster img {
+                width: 100%;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            }
+
+        .movie-info {
+            flex: 1 1 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .movie-info h1 {
+                font-size: 2.5rem;
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            .movie-info p {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .movie-info span {
+                font-weight: bold;
+                color: #e74c3c;
+            }
+
+        /* Actor List */
+        .actors-section {
+            margin-top: 40px;
+        }
+
+        .actors-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .actors-list {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .actor {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+            .actor:hover {
+                transform: scale(1.1);
+            }
+
+            .actor img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #e74c3c;
+            }
+
+            .actor p {
+                margin-top: 8px;
+                font-weight: 600;
+            }
+
+        /* Trailer Video */
+        .trailer-section {
+            margin-top: 50px;
+        }
+
+        .trailer-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Movie Details -->
+        <div class="movie-details-container">
+            <div class="movie-poster">
+                <img src="~/Photos/@Model.Movies.ImgUrl" alt="Movie Poster">
+            </div>
+            <div class="movie-info">
+                <h1>@Model.Movies.Name</h1>
+                <p><span>Cinema:</span> @Model.Movies.Cinema.name</p>
+                <p><span>Price:</span> @Model.Movies.Price EGP</p>
+                <p><span>Start Date:</span> @Model.Movies.StartDate</p>
+                <p><span>End Date:</span> @Model.Movies.EndDate</p>
+                <p><span>Category:</span> @Model.Movies.Category.Name</p>
+                <p><span>Status:</span> @Model.Movies.MovieStatus</p>
+            </div>
+        </div>
+
+        <!-- Actors -->
+        <div class="actors-section">
+            <h2 class="actors-title">Cast</h2>
+            
+                    <a href="#">
+                        <img class="actor-photo" src="~/Photos/cast1.png" alt="Chris Redfield">
+                        <img class="actor-photo" src="~/Photos/cast2.png" alt="Chris Redfield">
+                        <img class="actor-photo" src="~/Photos/cast3.png" alt="Chris Redfield">
+                        <img class="actor-photo" src="~/Photos/cast4.png" alt="Chris Redfield">
+
+                    </a>
+          
+        </div>
+
+        <!-- Trailer -->
+        <div class="trailer-section">
+            <h2 class="trailer-title">Trailer</h2>
+            <iframe src="https://www.youtube.com/embed/PXi3Mv6KMzY"
+                    title="Kung Fu Panda – Official Trailer"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+</body>
+</html>
