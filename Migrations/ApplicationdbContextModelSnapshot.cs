@@ -46,7 +46,7 @@ namespace Cenima_project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProfilePictuer")
+                    b.Property<string>("ProfilePicture")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -64,6 +64,9 @@ namespace Cenima_project.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ActorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActorsId")
                         .HasColumnType("int");
 
                     b.Property<int>("MovieId")

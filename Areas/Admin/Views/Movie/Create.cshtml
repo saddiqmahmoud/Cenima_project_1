@@ -1,0 +1,81 @@
+﻿@model CategoryWithCinemaVM
+<div class="container">
+    <div class="card p-4 mx-auto" style="max-width: 1000px;">
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="Name">
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" name="Description" rows="3" placeholder="You Description Here..."></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="Price" class="form-label">Price </label>
+                <input type="text" class="form-control" name="Price">
+            </div>
+            <div class="mb-3">
+                <label for="MainImg" class="form-label">ImgUrl</label>
+                <input type="file" class="form-control" id="MainImg" name="MainImg">
+                <img id="previewImage" src="#" alt="Image Preview" class="mt-2" style="max-width: 200px; display: none;">
+            </div>
+            
+            <div class="mb-3">
+                <label for="TrailerUrl" class="form-label">TrailerUrl</label>
+                <input type="text" class="form-control" name="TrailerUrl">
+            </div>
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">StartDate</label>
+                <input type="text" class="form-control" name="StartDate">
+            </div>
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">EndDate</label>
+                <input type="text" class="form-control" name="EndDate">
+            </div>
+            <div class="mb-3">
+                <label for="MovieStatus" class="form-label">MovieStatus</label>
+                <input type="text" class="form-control" name="MovieStatus">
+            </div>
+            <div class="mb-3">
+                <label for="CategoryId" class="form-label">Category</label>
+                <select name="CategoryId" class="form-select">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option selected value="@item.Id">@item.Name</option>
+                    }
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="CinemaId" class="form-label">Cinema</label>
+                <select name="CinemaId" class="form-select">
+                    @foreach (var item in Model.Cinemas)
+                    {
+                        <option selected value="@item.Id">@item.name</option>
+                    }
+
+                </select>
+            
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary" style="width:150px;">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('MainImg').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewImage = document.getElementById('previewImage');
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block'; // أظهر الصورة
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

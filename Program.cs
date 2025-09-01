@@ -27,7 +27,7 @@ namespace Cenima_project
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=FirstMove}/{controller=Home}/{action=Index}/{id?}")
+                pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

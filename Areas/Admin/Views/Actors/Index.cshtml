@@ -1,0 +1,79 @@
+﻿@model List<Actor>
+<div class="container">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">All ITEMS</h4>
+            <a href="/Admin/Actors/Create" class="btn btn-success">Create</a>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">FirstName</th>
+                            <th scope="col">LastName</th>
+                            <th scope="col">Bio</th>
+                            <th scope="col">ProfilePicture</th>
+                            <th scope="col">News</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.FirstName</td>
+                                <th >@item.LastName</th>
+                                @if(item.Bio.Length>50 && item.Bio is not null)
+                                {
+                                    <td>@item.Bio.Substring(0,50).....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.Bio.....</td>
+                                }
+                                <td>@item.ProfilePicture</td>
+                                @if (item.News.Length > 50 && item.News is not null)
+                                {
+                                    <td>@item.News.Substring(0, 50).....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.News.....</td>
+                                }
+                                <td>
+                                    <a href="/Admin/Actors/Edite/@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" onclick="confirmDelete(@item.Id)" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, redirect to the delete URL
+                window.location.href = '/Admin/Actors/Delete/' + id;
+            }
+        });
+    }
+</script>

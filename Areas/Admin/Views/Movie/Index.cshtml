@@ -1,0 +1,84 @@
+﻿@model List<Movie>
+<div class="container">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">All Products</h4>
+            <a href="/Admin/Movie/Create" class="btn btn-success">Create</a>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">ImgUrl</th>
+                            <th scope="col">TrailerUrl</th>
+                            <th scope="col">StartDate</th>
+                            <th scope="col">EndDate</th>
+                            <th scope="col">MovieStatus</th>
+                            <th scope="col">Cinema Name</th>
+                            <th scope="col">Category Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                @if(item.Description is not null && item.Description.Length>50 )
+                                {
+                                    <td>@item.Description.Substring(0,25).....</td>
+                                }
+                                else
+                                {
+                                    <td>@item.Description.....</td>
+                                }
+
+                                <td>@item.Price.ToString("c")</td>
+                                <th scope="col">@item.ImgUrl</th>
+                                <th scope="col">@item.TrailerUrl</th>
+                                <td>@item.StartDate</td>
+                                <td>@item.EndDate</td>
+                                <td>@item.MovieStatus</td>
+                                <td>@item.Category?.Name</td>
+                                <td>@item.Cinema?.name</td>
+                               
+                                <td>
+                                    <a href="/Admin/Movie/Edite/@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" onclick="confirmDelete(@item.Id)" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, redirect to the delete URL
+                window.location.href = '/Admin/Movie/Delete/' + id;
+            }
+        });
+    }
+</script>
