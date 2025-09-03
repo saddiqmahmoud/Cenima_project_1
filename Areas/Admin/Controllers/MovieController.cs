@@ -30,6 +30,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Movie movie,IFormFile MinImg)
         {
+            TempData["Sucess_notification"] = "Movie Create Succeussfully";
             if (MinImg is not null && MinImg.Length > 0)
             {
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(MinImg.FileName);
@@ -68,6 +69,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edite(Movie movie, IFormFile? MainImg)
         {
+            TempData["Sucess_notification"] = "Movie Edite Succeussfully";
             var moviedb = await _MovieRepository.GetOneAsync(e => e.Id == movie.Id, Tracked: false);
             if (MainImg is not null && MainImg.Length > 0)
             {
@@ -95,7 +97,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-          
+            TempData["Sucess_notification"] = "Movie Delete Succeussfully";
             var movie = await _MovieRepository.GetOneAsync(e => e.Id == id);
             if (movie is null)
             {

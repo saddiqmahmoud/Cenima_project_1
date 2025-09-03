@@ -22,7 +22,8 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Cinema Cinema,IFormFile cinemaLogo)
         {
-            if(cinemaLogo is not null && cinemaLogo.Length>0)
+            TempData["Sucess_notification"] = "Cinema Create Succeussfully";
+            if (cinemaLogo is not null && cinemaLogo.Length>0)
             {
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(cinemaLogo.FileName);
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Photos", fileName);
@@ -50,6 +51,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edite(Cinema Cinema, IFormFile? cinemaLogo)
         {
+            TempData["Sucess_notification"] = "Cinema Edite Succeussfully";
             var cinemadb = await _CinemaRepositry.GetOneAsync(e=>e.Id == Cinema.Id,Tracked:false);
             if(cinemaLogo is not null && cinemaLogo.Length>0)
             {
@@ -77,6 +79,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Delete(int Id)
         {
+            TempData["Sucess_notification"] = "Cinema Delete Succeussfully";
             var Cinema = await _CinemaRepositry.GetOneAsync(e => e.Id == Id);
             if(Cinema is null)
             {

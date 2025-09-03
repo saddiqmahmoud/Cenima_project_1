@@ -24,6 +24,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
+            TempData["Sucess_notification"] = "Category Create Succeussfully";
             await _CategoryRepository.CreateAsync(category);
             await _CategoryRepository.Commit();
             return RedirectToAction(SD.IndexPage);
@@ -39,12 +40,14 @@ namespace Cenima_project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Edite(Category category)
         {
+            TempData["Sucess_notification"] = "Category Edite Succeussfully";
             _CategoryRepository.Update(category);
             await _CategoryRepository.Commit();
             return RedirectToAction(SD.IndexPage);
         }
         public async Task<IActionResult> Delete(int Id)
         {
+            TempData["Sucess_notification"] = "Category Delete Succeussfully";
             var category = await _CategoryRepository.GetOneAsync(e => e.Id == Id);
             if(category is null)
             {

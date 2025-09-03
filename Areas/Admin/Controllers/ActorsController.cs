@@ -22,6 +22,11 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Actor actor,IFormFile profileImag)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            TempData["Sucess_notification"] = "Actor Create Succeussfully";
             if(profileImag is not null && profileImag.Length>0)
             {
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(profileImag.FileName);
@@ -50,6 +55,11 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edite(Actor actor, IFormFile? profileImag)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            TempData["Sucess_notification"] = "Actor Edite Succeussfully";
             var actrodb = await _ActorRepositry.GetOneAsync(e=>e.Id == actor.Id,Tracked:false);
             if(profileImag is not null && profileImag.Length>0)
             {
@@ -77,6 +87,7 @@ namespace Cenima_project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Delete(int Id)
         {
+            TempData["Sucess_notification"] = "Actor Delete Succeussfully";
             var actor = await _ActorRepositry.GetOneAsync(e => e.Id == Id);
             if(actor is null)
                 return RedirectToAction(SD.NotFoundPage, SD.HomeController);

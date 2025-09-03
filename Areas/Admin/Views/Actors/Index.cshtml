@@ -58,7 +58,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+@section Scripts
+{
+    <partial name="_NotificationLayout" />
+}
 <script>
     function confirmDelete(id) {
         Swal.fire({
@@ -77,3 +80,4 @@
         });
     }
 </script>
+

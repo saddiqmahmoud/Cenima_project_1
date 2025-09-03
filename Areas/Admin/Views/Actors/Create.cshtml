@@ -1,15 +1,17 @@
-﻿
+﻿@model Actor
 <div class="container">
     <div class="card p-4 mx-auto" style="max-width: 1000px;">
         <form method="post"enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="FirstName" class="form-label">FirstName</label>
-                <input type="text" class="form-control" name="FirstName">
+                <input type="text" class="form-control" name="FirstName" value="@Model.FirstName">
             </div>
+            <span class="text-bg-danger" asp-validation-for="@Model.FirstName" asp-for="FirstName"></span>
             <div class="mb-3">
                 <label for="LastName" class="form-label">LastName</label>
-                <input type="text" class="form-control" name="LastName">
+                <input type="text" class="form-control" name="LastName" value="@Model.LastName">
             </div>
+            <span class="text-bg-danger" asp-validation-for="@Model.FirstName" asp-for="LastName"></span>
             <div class="mb-3">
                 <label for="Bio" class="form-label">Bio</label>
                 <textarea class="form-control" name="Bio" rows="3" placeholder="You Description Here..."></textarea>
