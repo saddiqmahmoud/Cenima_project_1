@@ -71,7 +71,7 @@ namespace Cenima_project.Areas.Customer.Controllers
         {
             var details = _context.Movies.Include(e => e.Category).Include(e => e.Cinema).Include(e => e.ActorMovie).FirstOrDefault(e => e.Id == id);
           
-            var items = _context.ActorMovies.Include(e => e.Actor).Where(e => e.MoviesId == id).ToList();
+            var items = _context.ActorMovies.Include(e => e.Actor).Where(e => e.MovieId == id).ToList();
 
             var input = new Actor();
 
