@@ -6,11 +6,12 @@
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" name="Name">
             </div>
-
+             <span class="text-bg-danger" asp-validation-for="@Model.movie.Name" asp-for="Name"></span>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" name="Description" rows="3" placeholder="You Description Here..."></textarea>
             </div>
+            <span class="text-bg-danger" asp-validation-for="@Model.movie.Description" asp-for="Description"></span>
             <div class="mb-3">
                 <label for="Price" class="form-label">Price </label>
                 <input type="text" class="form-control" name="Price">
@@ -20,7 +21,7 @@
                 <input type="file" class="form-control" id="MainImg" name="MainImg">
                 <img id="previewImage" src="#" alt="Image Preview" class="mt-2" style="max-width: 200px; display: none;">
             </div>
-            
+            <span class="text-bg-danger" asp-validation-for="@Model.movie.ImgUrl" asp-for="ImgUrl"></span>
             <div class="mb-3">
                 <label for="TrailerUrl" class="form-label">TrailerUrl</label>
                 <input type="text" class="form-control" name="TrailerUrl">

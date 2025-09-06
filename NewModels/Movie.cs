@@ -6,12 +6,12 @@ namespace Cenima_project.NewModels
     {
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MaxLength(30, ErrorMessage = "max 30")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MinLength(3, ErrorMessage = "max 3")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MaxLength(30, ErrorMessage = "max 30")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MinLength(3, ErrorMessage = "max 3")]
         public string? Description { get; set; }
         public double Price { get; set; }
-        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MaxLength(30, ErrorMessage = "max 30")]
+        [Required(ErrorMessage = "هذا الحقل مطلوب يافندم!"), MinLength(3, ErrorMessage = "max 5")]
         public string ImgUrl { get; set; }//image
         public string TrailerUrl { get; set; }
         public DateTime StartDate { get; set; }

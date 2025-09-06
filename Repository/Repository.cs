@@ -1,10 +1,12 @@
 ﻿using Cenima_project.Data;
+using Cenima_project.Repository.IRepositores;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Cenima_project.Repository
 {
-    public class Repository<T>where T : class
+    public class Repository<T>:IRepositores<T> where T : class
     {
         private ApplicationdbContext _Context = new();
         private DbSet<T> _db;

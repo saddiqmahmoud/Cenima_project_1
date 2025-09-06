@@ -1,4 +1,4 @@
-﻿
+﻿@model Cinema
 <div class="container">
     <div class="card p-4 mx-auto" style="max-width: 1000px;">
         <form method="post"enctype="multipart/form-data">
@@ -6,11 +6,12 @@
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name">
             </div>
-           
+             <span class="text-bg-danger" asp-validation-for="@Model.name" asp-for="name"></span>
             <div class="mb-3">
                 <label for="Description" class="form-label">Description</label>
                 <textarea class="form-control" name="Description" rows="3" placeholder="You Description Here..."></textarea>
             </div>
+             <span class="text-bg-danger" asp-validation-for="@Model.Description" asp-for="Description"></span>
             <div class="mb-3">
                 <label for="cinemaLogo" class="form-label">CinemaLogo</label>
                 <input type="file" class="form-control" id="cinemaLogo" name="cinemaLogo">

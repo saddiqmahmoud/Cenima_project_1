@@ -7,7 +7,11 @@ namespace Cenima_project.Areas.Admin.Controllers
     [Area(SD.AdminArea)]
     public class CenimaController : Controller
     {
-        private Repository<Cinema> _CinemaRepositry = new();
+        private IRepositores<Cinema> _CinemaRepositry;// = new Repository<Cinema>();
+        public CenimaController(IRepositores<Cinema> CinemaRepositry)
+        {
+            _CinemaRepositry = CinemaRepositry;
+        }
         public async Task<IActionResult> Index()
         {
             var Cenima = await _CinemaRepositry.GetAsync();
@@ -22,6 +26,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Cinema Cinema,IFormFile cinemaLogo)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(Cinema);
+            }
             TempData["Sucess_notification"] = "Cinema Create Succeussfully";
             if (cinemaLogo is not null && cinemaLogo.Length>0)
             {
@@ -51,6 +59,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edite(Cinema Cinema, IFormFile? cinemaLogo)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(Cinema);
+            }
             TempData["Sucess_notification"] = "Cinema Edite Succeussfully";
             var cinemadb = await _CinemaRepositry.GetOneAsync(e=>e.Id == Cinema.Id,Tracked:false);
             if(cinemaLogo is not null && cinemaLogo.Length>0)

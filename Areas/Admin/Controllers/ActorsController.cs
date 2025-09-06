@@ -7,7 +7,11 @@ namespace Cenima_project.Areas.Admin.Controllers
     [Area(SD.AdminArea)]
     public class ActorsController : Controller
     {
-        private Repository<Actor> _ActorRepositry = new();
+        private IRepositores<Actor> _ActorRepositry;// = new Repository<Actor>();
+        public ActorsController(IRepositores<Actor> ActorRepositry)
+        {
+            _ActorRepositry = ActorRepositry;
+        }
         public async Task<IActionResult> Index()
         {
             var actors = await _ActorRepositry.GetAsync();

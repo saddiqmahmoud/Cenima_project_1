@@ -8,6 +8,10 @@ namespace Cenima_project
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IRepositores<Actor>, Repository<Actor>>();
+            builder.Services.AddScoped<IRepositores<Cinema>, Repository<Cinema>>();
+            builder.Services.AddScoped<IRepositores<Category>, Repository<Category>>();
+            builder.Services.AddScoped<IRepositores<Movie>, Repository<Movie>>();
 
             var app = builder.Build();
 

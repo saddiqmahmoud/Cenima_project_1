@@ -9,8 +9,12 @@ namespace Cenima_project.Areas.Admin.Controllers
     [Area(SD.AdminArea)]
     public class CategoryController : Controller
     {
-   
-        private Repository<Category> _CategoryRepository = new();
+
+        private IRepositores<Category> _CategoryRepository;// = new Repository<Category>();
+        public CategoryController(IRepositores<Category> CategoryRepository)
+        {
+            _CategoryRepository= CategoryRepository;
+        }
         public async Task<IActionResult> Index()
         {
             var categories = await _CategoryRepository.GetAsync();
@@ -24,6 +28,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(category);
+            }
             TempData["Sucess_notification"] = "Category Create Succeussfully";
             await _CategoryRepository.CreateAsync(category);
             await _CategoryRepository.Commit();
@@ -40,6 +48,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Edite(Category category)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(category);
+            }
             TempData["Sucess_notification"] = "Category Edite Succeussfully";
             _CategoryRepository.Update(category);
             await _CategoryRepository.Commit();

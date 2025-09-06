@@ -6,10 +6,12 @@
                 <label for="FirstName" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" value="@Model.name">
             </div>
+            <span class="text-bg-danger" asp-validation-for="@Model.name" asp-for="name"></span>
             <div class="mb-3">
                 <label for="Description" class="form-label">Description</label>
                 <textarea class="form-control" name="Description" rows="3" placeholder="You Description Here...">@Model.Description</textarea>
             </div>
+            <span class="text-bg-danger" asp-validation-for="@Model.Description" asp-for="Description"></span>
             <div class="mb-3">
                 <label for="cinemaLogo" class="form-label">CinemaLogo</label>
                 <input type="file" class="form-control" id="cinemaLogo" name="cinemaLogo">
@@ -29,7 +31,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.getElementById('MainImg').addEventListener('change', function(event) {
+    document.getElementById('cinemaLogo').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();

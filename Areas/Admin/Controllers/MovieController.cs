@@ -6,9 +6,15 @@ namespace Cenima_project.Areas.Admin.Controllers
     [Area(SD.AdminArea)]
     public class MovieController : Controller
     {
-        private Repository<Movie> _MovieRepository = new();
-        private Repository<Category> _CategoryRepository = new();
-        private Repository<Cinema> _CinemaRepository = new();
+        private IRepositores<Movie> _MovieRepository;// = new Repository<Movie>();
+        private IRepositores<Category> _CategoryRepository;// = new Repository<Category>();
+        private IRepositores<Cinema> _CinemaRepository;// = new Repository<Cinema>();
+        public MovieController(IRepositores<Movie> MovieRepository, IRepositores<Category> CategoryRepository, IRepositores<Cinema> CinemaRepository)
+        {
+            _MovieRepository = MovieRepository;
+            _CategoryRepository = CategoryRepository;
+            _CinemaRepository = CinemaRepository;
+        }
         public async Task<IActionResult> Index()
         {
             var movies = await _MovieRepository.GetAsync(includes: [e => e.Category, e => e.Cinema]);
@@ -30,6 +36,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Movie movie,IFormFile MinImg)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(movie);
+            }
             TempData["Sucess_notification"] = "Movie Create Succeussfully";
             if (MinImg is not null && MinImg.Length > 0)
             {
@@ -69,6 +79,10 @@ namespace Cenima_project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edite(Movie movie, IFormFile? MainImg)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(movie);
+            }
             TempData["Sucess_notification"] = "Movie Edite Succeussfully";
             var moviedb = await _MovieRepository.GetOneAsync(e => e.Id == movie.Id, Tracked: false);
             if (MainImg is not null && MainImg.Length > 0)
